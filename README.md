@@ -1,3 +1,7 @@
+**Important** 
+
+This project is AI slop. It passes the tests, but still use at your own risk. 
+
 # PostCSS Deadleafer
 
 A PostCSS plugin that enforces layout-logic constraints similar to TypeScript's type safety. It identifies and prunes "dead" or "invalid" CSS properties based on CSS Level 3 Formatting Contexts.
