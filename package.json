@@ -1,0 +1,43 @@
+{
+  "name": "postcss-deadleafer",
+  "version": "1.0.0",
+  "description": "PostCSS plugin that prunes dead CSS properties based on formatting contexts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "postcss",
+    "postcss-plugin",
+    "css",
+    "deadleafing",
+    "pruning",
+    "validation",
+    "linting"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "postcss": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.5.0",
+    "postcss": "^8.4.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

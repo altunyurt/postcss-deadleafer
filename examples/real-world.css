@@ -1,0 +1,153 @@
+/**
+ * Real-world CSS example showing common issues that TypedCSS can catch
+ */
+
+/* Common mistake: Applying flex properties to non-flex containers */
+.navbar {
+  display: block;
+  justify-content: space-between; /* ERROR: Needs display: flex */
+  align-items: center; /* ERROR: Needs display: flex */
+  padding: 1rem;
+  background: #333;
+}
+
+/* Correct version */
+.navbar-correct {
+  display: flex;
+  justify-content: space-between; /* VALID */
+  align-items: center; /* VALID */
+  padding: 1rem;
+  background: #333;
+}
+
+/* Inline elements with box model properties */
+.icon {
+  display: inline;
+  width: 24px; /* ERROR: Inline elements ignore width */
+  height: 24px; /* ERROR: Inline elements ignore height */
+  margin-top: 5px; /* ERROR: Inline elements ignore vertical margins */
+  color: #666;
+}
+
+/* Correct version with inline-block */
+.icon-correct {
+  display: inline-block;
+  width: 24px; /* VALID */
+  height: 24px; /* VALID */
+  margin-top: 5px; /* VALID */
+  color: #666;
+}
+
+/* Or blockified with position */
+.icon-absolute {
+  display: inline;
+  position: absolute;
+  width: 24px; /* VALID due to blockification */
+  height: 24px; /* VALID due to blockification */
+  top: 0;
+  left: 0;
+  color: #666;
+}
+
+/* Grid properties in wrong context */
+.layout {
+  display: block;
+  grid-template-columns: 1fr 1fr; /* ERROR: Needs display: grid */
+  gap: 1rem; /* ERROR: Needs flex/grid context */
+}
+
+/* Positioning issues */
+.tooltip {
+  position: static;
+  z-index: 1000; /* ERROR: Needs non-static position */
+  background: white;
+  border: 1px solid #ccc;
+}
+
+.tooltip-correct {
+  position: absolute;
+  z-index: 1000; /* VALID */
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+}
+
+/* Float in flex context (common migration issue) */
+.legacy-item {
+  display: flex;
+  float: left; /* ERROR: float ignored in flex context */
+  margin-right: 1rem;
+}
+
+.legacy-item-correct {
+  display: flex;
+  /* No float needed - use flexbox alignment */
+  margin-right: 1rem;
+}
+
+/* Vertical-align on block elements */
+.button {
+  display: inline-block;
+  vertical-align: middle; /* ERROR: Ignored on block-level elements */
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+}
+
+.button-correct {
+  display: inline-flex;
+  align-items: center; /* Use flex alignment instead */
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+}
+
+/* Complex example with nested contexts */
+.card {
+  display: block;
+  width: 300px;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  
+  /* Nested element that should be flex */
+  .card-header {
+    display: block;
+    justify-content: space-between; /* ERROR: Needs flex */
+    align-items: center; /* ERROR: Needs flex */
+  }
+  
+  /* Correct nested version */
+  .card-header-correct {
+    display: flex;
+    justify-content: space-between; /* VALID */
+    align-items: center; /* VALID */
+  }
+}
+
+/* Responsive design issues */
+@media (max-width: 768px) {
+  .responsive-nav {
+    display: block;
+    flex-direction: column; /* ERROR: Needs flex context */
+    gap: 0.5rem; /* ERROR: Needs flex/grid context */
+  }
+  
+  .responsive-nav-correct {
+    display: flex;
+    flex-direction: column; /* VALID */
+    gap: 0.5rem; /* VALID */
+  }
+}
+
+/* CSS custom properties still work fine */
+:root {
+  --primary-color: #007bff;
+  --spacing: 1rem;
+}
+
+.using-variables {
+  display: inline;
+  color: var(--primary-color);
+  /* width: 100px; This would still be invalid on inline element */
+}
